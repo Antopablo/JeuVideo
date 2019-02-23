@@ -24,7 +24,6 @@ namespace ProjetFilRouge1
             
 
             List<Personnage> ListeTeam = CreationTeam();
-            Console.WriteLine(ListeTeam[0]);
             Console.WriteLine("Commençons l'aventure ..");
             Console.WriteLine("Il faut d'abord équiper notre équipe");
 
@@ -167,28 +166,93 @@ namespace ProjetFilRouge1
                                 choix = Console.ReadLine().ToUpper();
 
                             } while (choix == "OUI");
-
                         }
                         Console.WriteLine(nomG + " a bien rejoint notre équipe \r\n");
+                        Console.WriteLine(guerrier);
                         break;
 
                     case "MAGE":
-                        Console.WriteLine("Un mage vient d'apparaitre ! Quel nom lui donner ? ");
+                        Console.WriteLine("Un Mage vient d'apparaitre ! Quel est son nom ?");
                         string nomM = Console.ReadLine();
-                        ListTeam.Add(new Mage(nomM));
+                        Mage mage = new Mage(nomM);
+                        ListTeam.Add(mage);
+                        Console.WriteLine("voulez-vous lui donner un équipement? oui/non");
+                        choix = Console.ReadLine().ToUpper();
+                        if (choix == "OUI")
+                        {
+                            do
+                            {
+                                Console.WriteLine("que voulez-vous lui donner ? épée / baton / arc / slip / rien");
+                                choixEquip = Console.ReadLine().ToUpper();
+                                switch (choixEquip)
+                                {
+                                    case "EPEE":
+                                        mage.AjouterEquipement(epee);
+                                        break;
+                                    case "BATON":
+                                        mage.AjouterEquipement(baton);
+                                        break;
+                                    case "ARC":
+                                        mage.AjouterEquipement(arc);
+                                        break;
+                                    case "SLIP":
+                                        mage.AjouterEquipement(slip);
+                                        break;
+                                    case "RIEN":
+                                        Console.WriteLine("l'ajout d'équipement de ce personnage est terminé");
+                                        break;
+                                }
+
+                                Console.WriteLine("voulez-vous donner un autre équipement ? oui/non");
+                                choix = Console.ReadLine().ToUpper();
+
+                            } while (choix == "OUI");
+                        }
                         Console.WriteLine(nomM + " a bien rejoint notre équipe \r\n");
+                        Console.WriteLine(mage);
                         break;
                     case "ARCHER":
-                        Console.WriteLine("Un archer rejoint les rangs, quel est son nom ?");
+                        Console.WriteLine("Un archer rejoint les rangs !! Comment va-t-on l'appeler ?");
                         string nomA = Console.ReadLine();
-                        ListTeam.Add(new Archer(nomA));
+                        Archer archer = new Archer(nomA);
+                        ListTeam.Add(archer);
+                        Console.WriteLine("voulez-vous lui donner un équipement? oui/non");
+                        choix = Console.ReadLine().ToUpper();
+                        if (choix == "OUI")
+                        {
+                            do
+                            {
+                                Console.WriteLine("que voulez-vous lui donner ? épée / baton / arc / slip / rien");
+                                choixEquip = Console.ReadLine().ToUpper();
+                                switch (choixEquip)
+                                {
+                                    case "EPEE":
+                                        archer.AjouterEquipement(epee);
+                                        break;
+                                    case "BATON":
+                                        archer.AjouterEquipement(baton);
+                                        break;
+                                    case "ARC":
+                                        archer.AjouterEquipement(arc);
+                                        break;
+                                    case "SLIP":
+                                        archer.AjouterEquipement(slip);
+                                        break;
+                                    case "RIEN":
+                                        Console.WriteLine("l'ajout d'équipement de ce personnage est terminé");
+                                        break;
+                                }
+
+                                Console.WriteLine("voulez-vous donner un autre équipement ? oui/non");
+                                choix = Console.ReadLine().ToUpper();
+
+                            } while (choix == "OUI");
+                        }
                         Console.WriteLine(nomA + " a bien rejoint notre équipe \r\n");
+                        Console.WriteLine(archer);
                         break;
                 }
-
-
             }
-
             return ListTeam;
         }
 
