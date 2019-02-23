@@ -126,8 +126,14 @@ namespace ProjetFilRouge1
             for (int i = 0; i < nbCrea; i++)
             {
                 string choixEquip;
-                Console.WriteLine("Que voulez-vous créer ? Guerrier / Mage / Archer ");
-                string choix = Console.ReadLine().ToUpper();
+                string choix = " ";
+                while ((choix != "GUERRIER") && (choix != "MAGE") && (choix != "ARCHER"))
+                {
+                    Console.WriteLine("Que voulez-vous créer ? Guerrier / Mage / Archer ");
+                    choix = Console.ReadLine().ToUpper();
+
+                } 
+
                 switch (choix)
                 {
                     case "GUERRIER":
