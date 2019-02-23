@@ -21,12 +21,14 @@ namespace ProjetFilRouge1
 
 
             Random randomCalc = new Random();
-            Item epee = new Item(10, Stats.attaque, "épée de fer");
-            Item slip = new Item(5, Stats.defense, "slip");
-            Item baton = new Item(15, Stats.attaque, "bâton de feu");
-            Item arc = new Item(10, Stats.attaque, "arc de bois");
+            
 
             List<Personnage> ListeTeam = CreationTeam();
+            Console.WriteLine(ListeTeam[0]);
+            Console.WriteLine("Commençons l'aventure ..");
+            Console.WriteLine("Il faut d'abord équiper notre équipe");
+
+
             List<Mob> ListeDennemi = CreationEnnemi();
             int nbEnnemi = ListeDennemi.Count;
             int nbTeam = ListeTeam.Count;
@@ -110,6 +112,12 @@ namespace ProjetFilRouge1
 
         static List<Personnage> CreationTeam()
         {
+            Item epee = new Item(10, Stats.attaque, "épée de fer");
+            Item slip = new Item(5, Stats.defense, "slip");
+            Item baton = new Item(15, Stats.attaque, "bâton de feu");
+            Item arc = new Item(10, Stats.attaque, "arc de bois");
+
+
             Random rnd = new Random();
             List<Personnage> ListTeam = new List<Personnage>();
             Console.WriteLine("Combien de personnage voulez-vous dans la team ?");
@@ -118,30 +126,63 @@ namespace ProjetFilRouge1
 
             for (int i = 0; i < nbCrea; i++)
             {
-
+                string choixEquip;
                 Console.WriteLine("Que voulez-vous créer ? Guerrier / Mage / Archer ");
                 string choix = Console.ReadLine().ToUpper();
                 switch (choix)
                 {
                     case "GUERRIER":
-                        Console.WriteLine("Un guerrier est créé, comment l'appeler ?");
+                        Console.WriteLine("Bienvenue au nouveau guerrier !! Comment s'appelle t-il ?");
                         string nomG = Console.ReadLine();
                         Guerrier guerrier = new Guerrier(nomG);
                         ListTeam.Add(guerrier);
-                        Console.WriteLine(nomG + " a été créé \r\n");
+                        Console.WriteLine("voulez-vous lui donner un équipement? oui/non");
+                        choix = Console.ReadLine().ToUpper();
+                        if (choix == "OUI")
+                        {
+                            do
+                            {
+                                Console.WriteLine("que voulez-vous lui donner ? épée / baton / arc / slip / rien");
+                                choixEquip = Console.ReadLine().ToUpper();
+                                switch (choixEquip)
+                                {
+                                    case "EPEE":
+                                        guerrier.AjouterEquipement(epee);
+                                        break;
+                                    case "BATON":
+                                        guerrier.AjouterEquipement(baton);
+                                        break;
+                                    case "ARC":
+                                        guerrier.AjouterEquipement(arc);
+                                        break;
+                                    case "SLIP":
+                                        guerrier.AjouterEquipement(slip);
+                                        break;
+                                    case "RIEN":
+                                        Console.WriteLine("l'ajout d'équipement de ce personnage est terminé");
+                                        break;
+                                }
+
+                                Console.WriteLine("voulez-vous donner un autre équipement ? oui/non");
+                                choix = Console.ReadLine().ToUpper();
+
+                            } while (choix == "OUI");
+
+                        }
+                        Console.WriteLine(nomG + " a bien rejoint notre équipe \r\n");
                         break;
 
                     case "MAGE":
-                        Console.WriteLine("Un mage est créé, comment l'appeler ?");
+                        Console.WriteLine("Un mage vient d'apparaitre ! Quel nom lui donner ? ");
                         string nomM = Console.ReadLine();
                         ListTeam.Add(new Mage(nomM));
-                        Console.WriteLine(nomM + " a été créé \r\n");
+                        Console.WriteLine(nomM + " a bien rejoint notre équipe \r\n");
                         break;
                     case "ARCHER":
-                        Console.WriteLine("Un archer est créé, comment l'appeler?");
+                        Console.WriteLine("Un archer rejoint les rangs, quel est son nom ?");
                         string nomA = Console.ReadLine();
                         ListTeam.Add(new Archer(nomA));
-                        Console.WriteLine(nomA + " a été créé \r\n");
+                        Console.WriteLine(nomA + " a bien rejoint notre équipe \r\n");
                         break;
                 }
 
