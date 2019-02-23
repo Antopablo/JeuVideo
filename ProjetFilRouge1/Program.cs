@@ -110,10 +110,6 @@ namespace ProjetFilRouge1
 
         static List<Personnage> CreationTeam()
         {
-
-
-
-
             Random rnd = new Random();
             List<Personnage> ListTeam = new List<Personnage>();
             Console.WriteLine("Combien de personnage voulez-vous dans la team ?");
@@ -124,10 +120,10 @@ namespace ProjetFilRouge1
             {
 
                 Console.WriteLine("Que voulez-vous créer ? Guerrier / Mage / Archer ");
-                string choix = Console.ReadLine();
+                string choix = Console.ReadLine().ToUpper();
                 switch (choix)
                 {
-                    case "Guerrier":
+                    case "GUERRIER":
                         Console.WriteLine("Un guerrier est créé, comment l'appeler ?");
                         string nomG = Console.ReadLine();
                         Guerrier guerrier = new Guerrier(nomG);
@@ -135,13 +131,13 @@ namespace ProjetFilRouge1
                         Console.WriteLine(nomG + " a été créé \r\n");
                         break;
 
-                    case "Mage":
+                    case "MAGE":
                         Console.WriteLine("Un mage est créé, comment l'appeler ?");
                         string nomM = Console.ReadLine();
                         ListTeam.Add(new Mage(nomM));
                         Console.WriteLine(nomM + " a été créé \r\n");
                         break;
-                    case "Archer":
+                    case "ARCHER":
                         Console.WriteLine("Un archer est créé, comment l'appeler?");
                         string nomA = Console.ReadLine();
                         ListTeam.Add(new Archer(nomA));
