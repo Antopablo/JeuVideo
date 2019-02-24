@@ -109,9 +109,10 @@ namespace ProjetFilRouge1
         static List<Personnage> CreationTeam()
         {
             Item epee = new Item(10, Stats.attaque, "épée de fer");
-            Item slip = new Item(5, Stats.defense, "slip");
+            Item slip = new Item(5, Stats.defense, "slip en coton");
             Item baton = new Item(15, Stats.attaque, "bâton de feu");
             Item arc = new Item(10, Stats.attaque, "arc de bois");
+            Item chausson = new Item(5, Stats.defense, "chausson licorne");
 
 
             Random rnd = new Random();
@@ -139,49 +140,65 @@ namespace ProjetFilRouge1
                         Guerrier guerrier = new Guerrier(nomG);
                         ListTeam.Add(guerrier);
                         Console.WriteLine("Bienvenue " + nomG);
-                        Console.WriteLine("voulez-vous lui donner un équipement? oui/non");
+                        Console.WriteLine("voulez-vous lui donner une pièce d'armure? oui/non");
                         choix = Console.ReadLine().ToUpper();
                         if (choix == "OUI")
                         {
-                            do
-                            {
-                                while ((choixEquip != "EPEE") && (choixEquip != "BATON") && (choixEquip != "ARC") && (choixEquip != "SLIP") && (choixEquip != "RIEN"))
+                                while ((choixEquip != "CHAUSSON") && (choixEquip != "SLIP") && (choixEquip != "RIEN"))
                                     {
-                                    Console.WriteLine("que voulez-vous lui donner ? épée / bâton / arc / slip / rien");
+                                    Console.WriteLine("que voulez-vous lui donner ? chausson / slip / rien");
                                     choixEquip = Console.ReadLine().ToUpper();
                                     }
                                     
                                 switch (choixEquip)
                                 {
-                                    case "EPEE":
-                                        guerrier.AjouterEquipement(epee);
-                                        Console.WriteLine("épée ajouté");
-                                        choixEquip = " ";
-                                        break;
-                                    case "BATON":
-                                        guerrier.AjouterEquipement(baton);
-                                        Console.WriteLine("bâton ajouté");
-                                        choixEquip = " ";
-                                        break;
-                                    case "ARC":
-                                        guerrier.AjouterEquipement(arc);
-                                        Console.WriteLine("arc ajouté");
+                                    case "CHAUSSON":
+                                        guerrier.AjouterEquipement(chausson);
+                                        Console.WriteLine("Chausson ajouté sur " +nomG);
                                         choixEquip = " ";
                                         break;
                                     case "SLIP":
                                         guerrier.AjouterEquipement(slip);
-                                        Console.WriteLine("slip ajouté");
+                                        Console.WriteLine("Slip ajouté sur " +nomG);
                                         choixEquip = " ";
                                         break;
                                     case "RIEN":
                                         Console.WriteLine("Ah VRAIMENT");
                                         break;
                                 }
+                        }
+                        choix = " ";
+                        Console.WriteLine("Voulez-vous donner une arme ? oui/non");
+                        choix = Console.ReadLine().ToUpper();
+                        if (choix == "OUI")
+                        {
+                            while (((choixEquip !="EPEE" && choixEquip != "BATON" && choixEquip != "ARC")))
+                            {
+                                Console.WriteLine("que voulez-vous lui donner ? épée / baton / arc / rien");
+                                choixEquip = Console.ReadLine().ToUpper();
+                            }
 
-                                Console.WriteLine("voulez-vous donner un autre équipement ? oui/non");
-                                choix = Console.ReadLine().ToUpper();
-
-                            } while (choix == "OUI");
+                            switch (choixEquip)
+                            {
+                                case "EPEE":
+                                    guerrier.AjouterEquipement(epee);
+                                    Console.WriteLine("épée ajouté");
+                                    choixEquip = " ";
+                                    break;
+                                case "BATON":
+                                    guerrier.AjouterEquipement(baton);
+                                    Console.WriteLine("bâton ajouté");
+                                    choixEquip = " ";
+                                    break;
+                                case "ARC":
+                                    guerrier.AjouterEquipement(arc);
+                                    Console.WriteLine("arc ajouté");
+                                    choixEquip = " ";
+                                    break;
+                                case "RIEN":
+                                    Console.WriteLine("Ah VRAIMENT");
+                                    break;
+                            }
                         }
                         Console.WriteLine(nomG + " a bien rejoint notre équipe \r\n");
                         Console.WriteLine(guerrier);
