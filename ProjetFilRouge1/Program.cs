@@ -207,7 +207,7 @@ namespace ProjetFilRouge1
         static List<Boss> CreationBoss()
         {
             List<Boss> ListeBoss = new List<Boss>();
-            ListeBoss.Add(new Boss("GROSTARBA"));
+            ListeBoss.Add(new Boss("Zigator le vampire"));
             return ListeBoss;
         }
 
@@ -458,9 +458,7 @@ namespace ProjetFilRouge1
                 }
             }
             return ListTeam;
-        }
-
-       
+        }    
 
     }
 }
