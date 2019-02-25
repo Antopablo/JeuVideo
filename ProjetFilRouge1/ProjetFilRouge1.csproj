@@ -44,6 +44,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Archer.cs" />
+    <Compile Include="Boss.cs" />
     <Compile Include="Guerrier.cs" />
     <Compile Include="Item.cs" />
     <Compile Include="Mage.cs" />
