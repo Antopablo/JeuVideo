@@ -21,10 +21,10 @@ namespace ProjetFilRouge1
 
 
             Random randomCalc = new Random();
-            
 
-            List<Personnage> ListeTeam = CreationTeam();
-            Console.WriteLine("Commençons l'aventure ..");
+            Console.WriteLine(" ########### Création de personnage(s) ########### ");
+            List <Personnage> ListeTeam = CreationTeam();
+            Console.WriteLine("########### Commençons l'aventure .. ###########");
             List<Mob> ListeDennemi = CreationEnnemi();
             List<Boss> ListeBoss = CreationBoss();
             int nbEnnemi = ListeDennemi.Count;
@@ -35,12 +35,12 @@ namespace ProjetFilRouge1
             int randomEnnemi = randomCalc.Next(0, nbEnnemi);
             int randomTeam = randomCalc.Next(0, nbTeam);
             string UserChoice = "";
-            //bool BossMort = false;
+
 
             do
             {
                 // team attaque
-                while (continu == true && nbEnnemi > 0)
+                while (continu == true && nbEnnemi > 0 && nbTeam > 0)
                 {
                     randomEnnemi = randomCalc.Next(0, nbEnnemi);
 
@@ -58,12 +58,12 @@ namespace ProjetFilRouge1
 
                     if (nbEnnemi == 0)
                     {
-                        Console.WriteLine("Tu as battu tous les ennemis, mais un bruit étrange se fait entendre ....");
+                        Console.WriteLine(" ########### Tu as battu tous les ennemis, mais un bruit étrange se fait entendre .... ########### ");
                     }
                 }
 
                 // ennemi attaque
-                while (continu == false && nbTeam > 0)
+                while (continu == false && nbTeam > 0 && nbEnnemi > 0)
                 {
                     randomEnnemi = randomCalc.Next(0, nbEnnemi);
                     randomTeam = randomCalc.Next(0, nbTeam);
@@ -81,12 +81,14 @@ namespace ProjetFilRouge1
                     if (nbTeam == 0)
                     {
                         Console.WriteLine("Nul, tu as perdu");
+                        Console.WriteLine("\r\n  FIN DU JEU \r\n ");
+                        Environment.Exit(0);                    // Fin du jeu
                     }
                 }
             } while (nbEnnemi > 0 && nbTeam > 0);
 
-            Console.WriteLine("Vous avancez, et vous trouvez une grande quantité de potion de boost de vie");
-            Console.WriteLine("voulez-vous booster l'équipe ?");
+            Console.WriteLine(" ########### Vous avancez, et vous trouvez une grande quantité de potion de boost de vie ########### ");
+            Console.WriteLine(" ########### Voulez-vous booster l'équipe ? ########### ");
             UserChoice = Console.ReadLine().ToUpper();
             if (UserChoice == "OUI")
             {
@@ -96,19 +98,73 @@ namespace ProjetFilRouge1
                 }
             }
 
-            Console.WriteLine("Le bruit se rapproche !! Un boss apparait !");
+            continu = false;
+            Console.WriteLine("\r\n  ########### Le bruit se rapproche !! Un boss apparait ! ########### \r\n ");
             CreationBoss();
-            Console.WriteLine("Il s'agit de " + ListeBoss[0].Nom);
-            Console.WriteLine("Voici ses caractéristiques " + ListeBoss[0]);
-            
+            Console.WriteLine(" ########### Il s'agit de " + ListeBoss[0].Nom + " ########### ");
+            Console.WriteLine(" ########### Voici ses caractéristiques " + ListeBoss[0]);
+            Console.WriteLine("\r\n ########### Le boss nous attaque !! ########### \r\n ");
 
+            do
+            {
+                while (nbBoss > 0 && nbTeam > 0 && continu == false)
+                {
+
+                    randomTeam = randomCalc.Next(0, nbTeam);
+                    ListeBoss[0].Attaquer(ListeTeam[randomTeam]);
+                    if (ListeTeam[randomTeam].HP == 0)
+                    {
+                        ListeTeam.Remove(ListeTeam[randomTeam]);
+                        nbTeam--;
+                    }
+
+                    if (ListeBoss[0].HP == 0)
+                    {
+                        ListeBoss.Remove(ListeBoss[0]);
+                        nbBoss--;
+                    }
+                    continu = gen.Next(100) < 50 ? true : false;  //50% de chance que le boss refasse une attaque
+                }
+                while (nbBoss > 0 && nbTeam > 0 && continu == true)
+                {
+                    randomTeam = randomCalc.Next(0, nbTeam);
+                    ListeTeam[randomTeam].Attaquer(ListeBoss[0]);
+                    if (ListeTeam[randomTeam].HP == 0)
+                    {
+                        ListeTeam.Remove(ListeTeam[randomTeam]);
+                        nbTeam--;
+                    }
+
+                    if (ListeBoss[0].HP == 0)
+                    {
+                        ListeBoss.Remove(ListeBoss[0]);
+                        nbBoss--;
+                    }
+
+                    continu = gen.Next(100) < 60 ? true : false; //60% de chance que la team refasse une attaque
+                }
+
+                if (nbTeam == 0)
+                {
+                    Console.WriteLine("\r\n \r\n  ########### Tous les membres de l'équipe sont mort .... Fin du jeu ###########\r\n \r\n  ");
+                    Environment.Exit(0);
+                }
+
+                if (nbBoss == 0)
+                {
+                    Console.WriteLine(" \r\n \r\n ########### Le boss est mort !! Le coup final a été porté par " + ListeTeam[randomTeam].Nom + " ########### \r\n \r\n ");
+
+                }
+            } while (nbBoss > 0 && nbTeam > 0);
+
+            Console.WriteLine("coucou");
         }
 
         static List<Mob> CreationEnnemi()
         {
             Random rnd = new Random();
             List<Mob> ListMob = new List<Mob>();
-            int crea = rnd.Next(2, 3);
+            int crea = rnd.Next(1, 5);              // nombre d'ennemi créé
             for (int i = 0; i < crea; i++)
             {
                 ListMob.Add(new Mob("Aibat" + (i + 1)));
@@ -126,7 +182,7 @@ namespace ProjetFilRouge1
         static List<Boss> CreationBoss()
         {
             List<Boss> ListeBoss = new List<Boss>();
-            ListeBoss.Add(new Boss("MADGIKKLUC"));
+            ListeBoss.Add(new Boss("GROSTARBA"));
             return ListeBoss;
         }
 
@@ -139,6 +195,7 @@ namespace ProjetFilRouge1
             Item baton = new Item(15, Stats.attaque, "bâton de feu");
             Item arc = new Item(10, Stats.attaque, "arc de bois");
             Item chausson = new Item(5, Stats.defense, "chausson licorne");
+
 
 
             Random rnd = new Random();
@@ -231,7 +288,6 @@ namespace ProjetFilRouge1
                         Console.WriteLine(nomG + " a bien rejoint notre équipe \r\n");
                         Console.WriteLine(guerrier);
                         break;
-
                     case "MAGE":
                         Console.WriteLine("Un Mage vient d'apparaitre ! Quel est son nom ?");
                         string nomM = Console.ReadLine();
