@@ -39,6 +39,7 @@ namespace ProjetFilRouge1
                 while (continu == true && nbEnnemi > 0)
                 {
                     randomEnnemi = randomCalc.Next(0, nbEnnemi);
+
                     randomTeam = randomCalc.Next(0, nbTeam);
                     Console.WriteLine("\r\n");
                     ListeTeam[randomTeam].Attaquer(ListeDennemi[randomEnnemi]);

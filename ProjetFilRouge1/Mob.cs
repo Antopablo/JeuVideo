@@ -9,8 +9,8 @@ namespace ProjetFilRouge1
         Random rnd = new Random();
         public Mob(string nom) : base(nom)
         {
-            this.ATK = rnd.Next(10, 20);
-            this.DEF = rnd.Next(5, 10);
+            this.ATK = rnd.Next(10, 35);
+            this.DEF = rnd.Next(5, 15);
             this.VIT = rnd.Next(5, 10);
             this.HP = rnd.Next(40, 70);
         }
