@@ -26,12 +26,16 @@ namespace ProjetFilRouge1
             List<Personnage> ListeTeam = CreationTeam();
             Console.WriteLine("Commençons l'aventure ..");
             List<Mob> ListeDennemi = CreationEnnemi();
+            List<Boss> ListeBoss = CreationBoss();
             int nbEnnemi = ListeDennemi.Count;
             int nbTeam = ListeTeam.Count;
+            int nbBoss = ListeBoss.Count;
             Random gen = new Random();
             bool continu = true;
             int randomEnnemi = randomCalc.Next(0, nbEnnemi);
             int randomTeam = randomCalc.Next(0, nbTeam);
+            string UserChoice = "";
+            //bool BossMort = false;
 
             do
             {
@@ -54,8 +58,7 @@ namespace ProjetFilRouge1
 
                     if (nbEnnemi == 0)
                     {
-                        Console.WriteLine("Bravo, vous avez gagné");
-                        Environment.Exit(0);
+                        Console.WriteLine("Tu as battu tous les ennemis, mais un bruit étrange se fait entendre ....");
                     }
                 }
 
@@ -78,11 +81,26 @@ namespace ProjetFilRouge1
                     if (nbTeam == 0)
                     {
                         Console.WriteLine("Nul, tu as perdu");
-                        Environment.Exit(0);
                     }
                 }
-            } while (nbEnnemi > 0 || nbTeam > 0);
+            } while (nbEnnemi > 0 && nbTeam > 0);
 
+            Console.WriteLine("Vous avancez, et vous trouvez une grande quantité de potion de boost de vie");
+            Console.WriteLine("voulez-vous booster l'équipe ?");
+            UserChoice = Console.ReadLine().ToUpper();
+            if (UserChoice == "OUI")
+            {
+                foreach (Personnage personnage in ListeTeam)
+                {
+                    personnage.BoostHpPotion();
+                }
+            }
+
+            Console.WriteLine("Le bruit se rapproche !! Un boss apparait !");
+            CreationBoss();
+            Console.WriteLine("Il s'agit de " + ListeBoss[0].Nom);
+            Console.WriteLine("Voici ses caractéristiques " + ListeBoss[0]);
+            
 
         }
 
@@ -90,7 +108,7 @@ namespace ProjetFilRouge1
         {
             Random rnd = new Random();
             List<Mob> ListMob = new List<Mob>();
-            int crea = rnd.Next(2, 11);
+            int crea = rnd.Next(2, 3);
             for (int i = 0; i < crea; i++)
             {
                 ListMob.Add(new Mob("Aibat" + (i + 1)));
@@ -103,6 +121,13 @@ namespace ProjetFilRouge1
             Console.WriteLine("Il y a " + ListMob.Count + " ennemi");
 
             return ListMob;
+        }
+
+        static List<Boss> CreationBoss()
+        {
+            List<Boss> ListeBoss = new List<Boss>();
+            ListeBoss.Add(new Boss("MADGIKKLUC"));
+            return ListeBoss;
         }
 
 
@@ -353,6 +378,8 @@ namespace ProjetFilRouge1
             }
             return ListTeam;
         }
+
+       
 
     }
 }
