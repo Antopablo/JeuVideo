@@ -4,15 +4,15 @@ using System.Text;
 
 namespace ProjetFilRouge1
 {
-    class Mob : Personnage
+    class Boss : Mob
     {
         Random rnd = new Random();
-        public Mob(string nom) : base(nom)
+        public Boss(string nom) : base(nom)
         {
-            this.ATK = rnd.Next(10, 20);
-            this.DEF = rnd.Next(10, 15);
+            this.ATK = rnd.Next(40, 50);
+            this.DEF = rnd.Next(5, 15);
             this.VIT = rnd.Next(5, 10);
-            this.HP = rnd.Next(40, 60);
+            this.HP = rnd.Next(70, 100);
         }
     }
 }

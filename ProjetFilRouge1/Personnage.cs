@@ -38,7 +38,7 @@ namespace ProjetFilRouge1
         public int HP
         {
             get { return _hp + GetBonus(Stats.pv); }
-            set
+           protected set
             {
                 try
                 {
@@ -127,6 +127,12 @@ namespace ProjetFilRouge1
                 ennemi = null;
             }
 
+        }
+
+        public void BoostHpPotion()
+        {
+            this.HP += 30;
+            Console.WriteLine(this.Nom + " gagne 30 HP grâce à la potion. Il a maintenant " + this.HP + " points de vie");
         }
     }
 }
