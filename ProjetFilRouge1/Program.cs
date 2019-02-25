@@ -124,7 +124,7 @@ namespace ProjetFilRouge1
             do
             {
                 Console.WriteLine("\r\n ########### Le boss nous attaque !! ########### \r\n ");
-                Console.WriteLine("Appuyer sur X pour continuer");
+                Console.WriteLine("\r\n Appuyer sur X pour continuer \r\n");
                 UserChoice = Console.ReadLine().ToUpper();
             } while (UserChoice != "X");
             UserChoice = " ";
@@ -252,8 +252,12 @@ namespace ProjetFilRouge1
                         Guerrier guerrier = new Guerrier(nomG);
                         ListTeam.Add(guerrier);
                         Console.WriteLine("Bienvenue " + nomG);
-                        Console.WriteLine("voulez-vous lui donner une pièce d'armure? oui/non");
-                        choix = Console.ReadLine().ToUpper();
+                        do
+                        {
+                            Console.WriteLine("voulez-vous lui donner une pièce d'armure? oui/non");
+                            choix = Console.ReadLine().ToUpper();
+                        } while (choix != "OUI" && choix != "NON");
+
                         if (choix == "OUI")
                         {
                                 while ((choixEquip != "CHAUSSON") && (choixEquip != "SLIP") && (choixEquip != "RIEN"))
@@ -281,8 +285,11 @@ namespace ProjetFilRouge1
                                 }
                         }
                         choix = " ";
-                        Console.WriteLine("Voulez-vous donner une arme ? oui/non");
-                        choix = Console.ReadLine().ToUpper();
+                        do
+                        {
+                            Console.WriteLine("Voulez-vous donner une arme ? oui/non");
+                            choix = Console.ReadLine().ToUpper();
+                        } while (choix != "OUI" && choix != "NON");
                         if (choix == "OUI")
                         {
                             while (choixEquip !="EPEE" && choixEquip != "BATON" && choixEquip != "ARC" && choixEquip !="RIEN")
@@ -324,11 +331,15 @@ namespace ProjetFilRouge1
                             Console.WriteLine("Un Mage vient d'apparaitre ! Quel est son nom ?");
                             nomM = Console.ReadLine();
                         } while (nomM == "");
+
                         Mage mage = new Mage(nomM);
                         ListTeam.Add(mage);
                         Console.WriteLine("Bienvenue " + nomM);
-                        Console.WriteLine("voulez-vous lui donner une pièce d'armure? oui/non");
-                        choix = Console.ReadLine().ToUpper();
+                        do
+                        {
+                            Console.WriteLine("voulez-vous lui donner une pièce d'armure? oui/non");
+                            choix = Console.ReadLine().ToUpper();
+                        } while (choix != "OUI" && choix != "NON");
                         if (choix == "OUI")
                         {
                             while ((choixEquip != "CHAUSSON") && (choixEquip != "SLIP") && (choixEquip != "RIEN"))
@@ -356,8 +367,12 @@ namespace ProjetFilRouge1
                             }
                         }
                         choix = " ";
-                        Console.WriteLine("Voulez-vous donner une arme ? oui/non");
-                        choix = Console.ReadLine().ToUpper();
+                        do
+                        {
+                            Console.WriteLine("Voulez-vous donner une arme ? oui/non");
+                            choix = Console.ReadLine().ToUpper();
+                        } while (choix != "OUI" && choix != "NON");
+
                         if (choix == "OUI")
                         {
                             while (choixEquip != "EPEE" && choixEquip != "BATON" && choixEquip != "ARC" && choixEquip != "RIEN")
@@ -399,6 +414,7 @@ namespace ProjetFilRouge1
                             Console.WriteLine("Un archer rejoint les rangs !! Comment va-t-on l'appeler ?");
                             nomA = Console.ReadLine();
                         } while (nomA == "");
+
                         Archer archer = new Archer(nomA);
                         ListTeam.Add(archer);
                         Console.WriteLine("Bienvenue " + nomA);
