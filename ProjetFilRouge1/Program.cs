@@ -39,6 +39,12 @@ namespace ProjetFilRouge1
 
             do
             {
+                Console.WriteLine("\r\n ########### Appuyer sur X pour commencer le combat ########### ");
+                UserChoice = Console.ReadLine().ToUpper();
+            } while (UserChoice != "X");
+            UserChoice = " ";
+            do
+            {
                 // team attaque
                 while (continu == true && nbEnnemi > 0 && nbTeam > 0)
                 {
@@ -97,16 +103,34 @@ namespace ProjetFilRouge1
                     personnage.BoostHpPotion();
                 }
             }
-
+            UserChoice = " ";
+            do
+            {
+                Console.WriteLine("Appuyer sur X pour continuer");
+                UserChoice = Console.ReadLine().ToUpper();
+            } while (UserChoice != "X");
+            UserChoice = " ";
             continu = false;
             Console.WriteLine("\r\n  ########### Le bruit se rapproche !! Un boss apparait ! ########### \r\n ");
             CreationBoss();
             Console.WriteLine(" ########### Il s'agit de " + ListeBoss[0].Nom + " ########### ");
             Console.WriteLine(" ########### Voici ses caractéristiques " + ListeBoss[0]);
-            Console.WriteLine("\r\n ########### Le boss nous attaque !! ########### \r\n ");
-
             do
             {
+                Console.WriteLine("Appuyer sur X pour continuer");
+                UserChoice = Console.ReadLine().ToUpper();
+            } while (UserChoice != "X");
+            UserChoice = " ";
+            do
+            {
+                Console.WriteLine("\r\n ########### Le boss nous attaque !! ########### \r\n ");
+                Console.WriteLine("Appuyer sur X pour continuer");
+                UserChoice = Console.ReadLine().ToUpper();
+            } while (UserChoice != "X");
+            UserChoice = " ";
+            do
+            {
+                //boss attaque
                 while (nbBoss > 0 && nbTeam > 0 && continu == false)
                 {
 
@@ -125,6 +149,7 @@ namespace ProjetFilRouge1
                     }
                     continu = gen.Next(100) < 50 ? true : false;  //50% de chance que le boss refasse une attaque
                 }
+                // attaque team
                 while (nbBoss > 0 && nbTeam > 0 && continu == true)
                 {
                     randomTeam = randomCalc.Next(0, nbTeam);
@@ -258,7 +283,7 @@ namespace ProjetFilRouge1
                         {
                             while (choixEquip !="EPEE" && choixEquip != "BATON" && choixEquip != "ARC" && choixEquip !="RIEN")
                             {
-                                Console.WriteLine("que voulez-vous lui donner ? épée / baton / arc / rien");
+                                Console.WriteLine("que voulez-vous lui donner ? epee / baton / arc / rien");
                                 choixEquip = Console.ReadLine().ToUpper();
                             }
 
@@ -329,7 +354,7 @@ namespace ProjetFilRouge1
                         {
                             while (choixEquip != "EPEE" && choixEquip != "BATON" && choixEquip != "ARC" && choixEquip != "RIEN")
                             {
-                                Console.WriteLine("que voulez-vous lui donner ? épée / baton / arc / rien");
+                                Console.WriteLine("que voulez-vous lui donner ? epee / baton / arc / rien");
                                 choixEquip = Console.ReadLine().ToUpper();
                             }
 
@@ -400,7 +425,7 @@ namespace ProjetFilRouge1
                         {
                             while (choixEquip != "EPEE" && choixEquip != "BATON" && choixEquip != "ARC" && choixEquip != "RIEN")
                             {
-                                Console.WriteLine("que voulez-vous lui donner ? épée / baton / arc / rien");
+                                Console.WriteLine("que voulez-vous lui donner ? epee / baton / arc / rien");
                                 choixEquip = Console.ReadLine().ToUpper();
                             }
 
